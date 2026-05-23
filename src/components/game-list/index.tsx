@@ -24,9 +24,9 @@ export default function GameList({ data, locale, channel }: Props) {
         <Box
           key={game?.id ?? index}
           mb={{ base: 3, md: 4, lg: 6 }}
-          breakInside="avoid"
           display="inline-block"
           w="full"
+          sx={{ breakInside: "avoid" }}
         >
           <GameItem
             data={game}
