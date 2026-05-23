@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Action",
+    "image": "/static/images/categories/action.svg",
+    "alias": "action"
+  },
+  {
+    "id": 2,
+    "name": "Adventure",
+    "image": "/static/images/categories/adventure.svg",
+    "alias": "adventure"
+  },
+  {
+    "id": 3,
+    "name": "Boys",
+    "image": "/static/images/categories/multiplayer.svg",
+    "alias": "boys"
+  },
+  {
+    "id": 4,
+    "name": "Shooting",
+    "image": "/static/images/categories/hypercasual.svg",
+    "alias": "shooting"
+  },
+  {
+    "id": 5,
+    "name": "Stickman",
+    "image": "/static/images/categories/soccer.svg",
+    "alias": "stickman"
+  }
+]

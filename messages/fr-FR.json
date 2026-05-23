@@ -1,0 +1,50 @@
+{
+  "Common": {
+    "Category": "Catégorie",
+    "Play": "Jouer",
+    "Recommend": "Recommander",
+    "Locales": "Localités",
+    "Introduction": "Introduction",
+    "Games": "{category} Jeux",
+    "Top": "Meilleurs",
+    "New": "Nouveaux",
+    "More": "Plus"
+  },
+  "NotFoundPage": {
+    "Title": "Non Trouvé"
+  },
+  "Info": {
+    "section1": {
+      "title": "Bienvenue sur <tagname>{hostname}</tagname> : Le Centre de Jeux Gratuit est une plateforme d'agrégation qui propose une variété de jeux en ligne que les joueurs peuvent jouer gratuitement. Il comprend généralement les fonctionnalités suivantes :",
+      "paragraph1": "1. Jeux diversifiés : couvrant plusieurs types tels que les jeux de rôle, les casse-têtes occasionnels et les compétitions pour répondre aux intérêts de différents joueurs.",
+      "paragraph2": "2. Pas besoin de télécharger : La plupart des jeux peuvent être joués directement dans le navigateur, ce qui est pratique et rapide et économise de l'espace de stockage.",
+      "paragraph3": "3. Fonctions sociales : De nombreuses plateformes offrent des fonctions d'interaction sociale, les joueurs peuvent jouer avec des amis ou communiquer dans la communauté.",
+      "paragraph4": "4. Mises à jour fréquentes : De nouveaux jeux sont mis à jour régulièrement pour garder la plateforme fraîche et active.",
+      "paragraph5": "Le Centre de Jeux Gratuit offre aux joueurs un environnement de divertissement relaxant et agréable, adapté aux moments de loisirs."
+    },
+    "section2": {
+      "title": "Découvrez quelques catégories de jeux passionnantes sur <tagname>{hostname}</tagname>",
+      "paragraph1": "Plongeons dans le monde passionnant des catégories de jeux que propose <tagname>{hostname}</tagname>. Voici un aperçu rapide des différentes catégories de jeux :",
+      "paragraph2": "1. Course",
+      "paragraph3": "Axé sur les courses, les joueurs peuvent conduire divers types de véhicules pour concourir sur différentes pistes, à la recherche de vitesse et de compétences.",
+      "paragraph4": "2. Casual",
+      "paragraph5": "Jeux simples et faciles à jouer, adaptés à la détente et au divertissement, généralement sans règles complexes, adaptés aux joueurs de tous âges.",
+      "paragraph6": "3. Compétence",
+      "paragraph7": "Concentré sur les compétences et les réactions du joueur, comprenant généralement des opérations difficiles et stimulantes, testant les compétences du joueur.",
+      "paragraph8": "4. Animaux",
+      "paragraph9": "Les jeux sur le thème des animaux peuvent inclure des éléments tels que la culture, l'aventure ou la simulation, adaptés aux joueurs qui aiment les animaux.",
+      "paragraph10": "5. Filles",
+      "paragraph11": "Jeux spécifiquement conçus pour les joueuses, impliquant généralement des éléments tels que la mode, le maquillage et la culture, mettant l'accent sur la créativité et la personnalité.",
+      "paragraph12": "Ces catégories couvrent un large éventail d'expériences de jeu, répondant aux besoins et aux préférences de différents joueurs."
+    },
+    "section3": {
+      "title": "Comment jouer à des jeux en ligne sur <tagname>{hostname}</tagname>",
+      "paragraph1": "D'accord, vous êtes prêt à plonger dans le monde de <tagname>{hostname}</tagname> – excellent choix ! Voici comment commencer :",
+      "paragraph2": "Étape 1 : Ouvrez votre navigateur web et rendez-vous sur <tagname>{hostname}</tagname>.",
+      "paragraph3": "Étape 2 : Parcourez notre bibliothèque de jeux et choisissez quelque chose qui attire votre attention.",
+      "paragraph4": "Étape 3 : Cliquez sur le jeu que vous souhaitez jouer – c'est aussi simple que ça !",
+      "paragraph5": "Étape 4 : Préparez-vous à vous amuser. Que vous jouiez seul ou en équipe avec des amis, le plaisir ne s'arrête jamais sur <tagname>{hostname}</tagname>.",
+      "paragraph6": "Rejoignez Name aujourd'hui et que le plaisir commence !"
+    }
+  }
+}

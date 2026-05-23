@@ -1,0 +1,50 @@
+{
+  "Common": {
+    "Category": "Category",
+    "Play": "Play",
+    "Recommend": "Recommend",
+    "Locales": "Locales",
+    "Introduction": "Introduction",
+    "Games": "{category} Games",
+    "Top": "Top",
+    "New": "New",
+    "More": "More"
+  },
+  "NotFoundPage": {
+    "Title": "Not Found"
+  },
+  "Info": {
+    "section1": {
+      "title": "🎮 Welcome to Slopegames.net – Your Ultimate Free Online Game Hub",
+      "paragraph1": "1. Diverse Game LibraryFrom role-playing adventures and brain-teasing puzzles to fast-paced competitions, we’ve got games for every taste and age group.",
+      "paragraph2": "2. No Downloads RequiredAll games are playable directly in your browser—fast, convenient, and storage-friendly.",
+      "paragraph3": "3. Social Gaming ExperienceChat with fellow players or invite friends to join your game sessions for a more interactive experience.",
+      "paragraph4": "4. Regular UpdatesNew games are added frequently, keeping the platform fresh, fun, and exciting.",
+      "paragraph5": "Whether you're looking for a quick break or hours of entertainment, Slopegames.net offers a fun and relaxing gaming environment for everyone."
+    },
+    "section2": {
+        "title": "Explore Exciting Game Categories on <tagname>{hostname}</tagname>",
+        "paragraph1": "Welcome to <tagname>{hostname}</tagname>! Discover a variety of thrilling game categories tailored for every type of player. Here’s a quick look:",
+        "paragraph2": "1. Action",
+        "paragraph3": "Get your adrenaline pumping with fast-paced games that test your reflexes and combat skills in dynamic environments.",
+        "paragraph4": "2. Adventure",
+        "paragraph5": "Embark on epic journeys filled with exploration, puzzles, and story-driven challenges that captivate your imagination.",
+        "paragraph6": "3. Boys",
+        "paragraph7": "Fun and engaging games designed especially for boys, featuring themes like sports, vehicles, and exciting challenges.",
+        "paragraph8": "4. Shooting",
+        "paragraph9": "Sharpen your aim in thrilling shooting games that offer various weapons and intense combat scenarios.",
+        "paragraph10": "5. Stickman",
+        "paragraph11": "Enjoy simple yet addictive stickman-style games with action-packed gameplay and creative challenges.",
+        "paragraph12": "These categories provide a wide range of gaming experiences to satisfy different interests and playing styles."
+    },
+    "section3": {
+      "title": "How to Play Online Games at <tagname>{hostname}</tagname>",
+      "paragraph1": "Ready to jump into the exciting world of <tagname>{hostname}</tagname>? Here’s a quick and easy guide to get you started:",
+      "paragraph2": "Step 1: Open your web browser and visit <tagname>{hostname}</tagname>.",
+      "paragraph3": "Step 2: Browse through our extensive game library and find the game that grabs your attention.",
+      "paragraph4": "Step 3: Simply click on your chosen game to start playing – it’s that easy!",
+      "paragraph5": "Step 4: Have fun! Whether you’re playing solo or teaming up with friends, endless entertainment awaits you at <tagname>{hostname}</tagname>.",
+      "paragraph6": "Sign up today and let the adventure begin!"
+    }
+  }
+}

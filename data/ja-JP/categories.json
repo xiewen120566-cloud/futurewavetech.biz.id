@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "動作です",
+    "image": "/static/images/categories/action.svg",
+    "alias": "action"
+  },
+  {
+    "id": 2,
+    "name": "冒険です",
+    "image": "/static/images/categories/adventure.svg",
+    "alias": "adventure"
+  },
+  {
+    "id": 3,
+    "name": "男子です",
+    "image": "/static/images/categories/multiplayer.svg",
+    "alias": "boys"
+  },
+  {
+    "id": 4,
+    "name": "射撃です",
+    "image": "/static/images/categories/hypercasual.svg",
+    "alias": "shooting"
+  },
+  {
+    "id": 5,
+    "name": "マッチマンです",
+    "image": "/static/images/categories/soccer.svg",
+    "alias": "stickman"
+  }
+]
