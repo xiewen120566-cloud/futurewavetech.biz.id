@@ -6,9 +6,6 @@ import React, { useCallback, useEffect, useRef, useMemo } from "react";
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
-    ttq?: {
-      track?: (event: string) => void;
-    };
   }
 }
 
