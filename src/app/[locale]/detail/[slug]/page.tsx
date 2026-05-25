@@ -76,7 +76,7 @@ export default async function Page({
       <Header hostname={hostname} categories={categories} />
       <Container maxWidth="container.xl" px={{ base: 3, md: 4, lg: 6 }} pt={{ base: 4, md: 6 }}>
         <ElTemplate
-          divId="div-gpt-ad-1779455753877-0"
+          divId="div-gpt-ad-future-detail-top"
           adUnitPath="/23353820184/0522Ad-01"
           sizes={[[300, 50], [300, 100], [300, 250], [300, 75], [320, 50]]}
           minWidth={300}
@@ -169,7 +169,7 @@ export default async function Page({
         </Box>
         <Info locale={locale} />
         {/* <ElTemplate
-          divId="div-gpt-ad-1779455753877-0"
+          divId="div-gpt-ad-future-detail-bottom"
           adUnitPath="/23353820184/0522Ad-01"
           sizes={[[300, 50], [300, 100], [300, 250], [300, 75], [320, 50]]}
           minWidth={300}

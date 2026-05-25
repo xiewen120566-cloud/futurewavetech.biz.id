@@ -3,6 +3,29 @@
 import { debounce } from "lodash";
 import React, { useCallback, useEffect, useRef, useMemo } from "react";
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+    ttq?: {
+      track?: (event: string) => void;
+    };
+  }
+}
+
+type AdData = {
+  adContainerId: string | null;
+  googleQueryId: string | null;
+  adClickTime: number;
+  publisherId: string | null;
+  adk: string | null;
+  adf: string | null;
+  slotname: string | null;
+  adSize: string | null;
+};
+
+const AD_CONTAINER_SELECTOR =
+  "[id^='div-gpt-ad-'], .gpt-slot, .adsbygoogle, .ad-placeholder";
+
 // 自定义的 useEffectEvent 钩子，用于添加和移除事件监听器
 function useEffectEvent(eventType: string, callback: (event: Event) => void) {
   useEffect(() => {
@@ -16,49 +39,104 @@ function useEffectEvent(eventType: string, callback: (event: Event) => void) {
 const ElClick: React.FC = () => {
   const isBlurTriggered = useRef<boolean>(false);
   const isBeforeUnloadHandled = useRef<boolean>(false);
+  const lastTrackedRef = useRef<{ signature: string; time: number } | null>(null);
 
-  const collectAdData = useCallback(() => {
-    try {
-      const activeElement = document.activeElement as HTMLIFrameElement | null;
-      if (!activeElement || activeElement.tagName !== "IFRAME") return null;
+  const buildAdData = useCallback(
+    (adContainer: Element | null, iframe: HTMLIFrameElement | null): AdData | null => {
+      try {
+        if (!adContainer || !iframe) return null;
 
-      const adContainer = activeElement.closest(".adsbygoogle");
-      const iframeSrc = activeElement.getAttribute("src");
-      if (adContainer && iframeSrc) {
-        const formatIframeSrc = new URL(iframeSrc)
-        const iframeSearchParams = new URLSearchParams(formatIframeSrc.search)
+        const iframeSrc = iframe.getAttribute("src");
+        if (!iframeSrc) return null;
+
+        const formatIframeSrc = new URL(iframeSrc, window.location.href);
+        const iframeSearchParams = new URLSearchParams(formatIframeSrc.search);
+        const slotId =
+          adContainer.getAttribute("id") ??
+          (
+            adContainer.querySelector?.(
+              ".gpt-slot[id], [id^='div-gpt-ad-']"
+            ) as HTMLElement | null
+          )?.getAttribute("id") ??
+          null;
+
         return {
-          adContainerId: adContainer.getAttribute("id"),
-          googleQueryId: activeElement.getAttribute("data-google-query-id"),
+          adContainerId: slotId,
+          googleQueryId: iframe.getAttribute("data-google-query-id"),
           adClickTime: Date.now(),
           publisherId: iframeSearchParams.get("client"),
           adk: iframeSearchParams.get("adk"),
           adf: iframeSearchParams.get("adf"),
           slotname: iframeSearchParams.get("slotname"),
-          adSize: iframeSearchParams.get("format")
+          adSize: iframeSearchParams.get("format"),
         };
+      } catch (error) {
+        console.error("Error collecting ad data:", error);
+        return null;
       }
-      return null;
-    } catch (error) {
-      console.error("Error collecting ad data:", error);
-      return null;
-    }
-  }, []);
+    },
+    []
+  );
+
+  const collectAdDataFromElement = useCallback(
+    (element: Element | null) => {
+      if (!element) return null;
+
+      const adContainer = element.closest(AD_CONTAINER_SELECTOR);
+      if (!adContainer) return null;
+
+      const iframe =
+        adContainer instanceof HTMLIFrameElement
+          ? adContainer
+          : (adContainer.querySelector("iframe") as HTMLIFrameElement | null);
+
+      return buildAdData(adContainer, iframe);
+    },
+    [buildAdData]
+  );
+
+  const collectAdData = useCallback(() => {
+    const activeElement = document.activeElement as HTMLElement | null;
+    if (!activeElement) return null;
+    return collectAdDataFromElement(activeElement);
+  }, [collectAdDataFromElement]);
+
+  const reportAdClick = useCallback(
+    (sourceEvent: string, adData: AdData | null) => {
+      if (!adData) return;
+
+      const signature = `${adData.adContainerId ?? "unknown"}:${adData.googleQueryId ?? "unknown"}`;
+      const now = Date.now();
+      if (
+        lastTrackedRef.current &&
+        lastTrackedRef.current.signature === signature &&
+        now - lastTrackedRef.current.time < 1500
+      ) {
+        return;
+      }
+
+      lastTrackedRef.current = { signature, time: now };
+
+      window.gtag?.("event", "ad_click", {
+        event_category: "advertising",
+        event_label: adData.slotname ?? adData.adContainerId ?? "unknown",
+        source_event: sourceEvent,
+        ad_container_id: adData.adContainerId ?? undefined,
+        google_query_id: adData.googleQueryId ?? undefined,
+        publisher_id: adData.publisherId ?? undefined,
+        adk: adData.adk ?? undefined,
+        adf: adData.adf ?? undefined,
+        slot_name: adData.slotname ?? undefined,
+        ad_size: adData.adSize ?? undefined,
+      });
+      window.ttq?.track?.("ClickButton");
+    },
+    []
+  );
 
   const trackAdClick = useCallback(() => {
-    const adData = collectAdData();
-    if (adData) {
-      // window.umami.track((props) => ({
-      //   ...props,
-      //   name: "adClick",
-      //   event: "visibilitychange",
-      //   data: {
-      //     ...adData,
-      //   },
-      // }));
-      window.ttq.track("ClickButton");
-    }
-  }, [collectAdData]);
+    reportAdClick("visibilitychange", collectAdData());
+  }, [collectAdData, reportAdClick]);
 
   const debouncedTrackAdClick = useMemo(
     () => debounce(trackAdClick, 500),
@@ -70,22 +148,11 @@ const ElClick: React.FC = () => {
       if (isBeforeUnloadHandled.current) return;
       const adData = collectAdData();
       if (adData) {
-        // 上报数据
-        // window.umami.track((props) => ({
-        //   ...props,
-        //   name: "adClick",
-        //   event: "beforeunload",
-        //   data: {
-        //     ...adData,
-        //   },
-        // }));
-        window.ttq.track("ClickButton");
-        console.log(JSON.stringify(adData));
-        // 使用更简洁的方式触发像素跟踪
+        reportAdClick("beforeunload", adData);
         isBeforeUnloadHandled.current = true;
       }
     },
-    [collectAdData]
+    [collectAdData, reportAdClick]
   );
 
   const handleBlur = useCallback(() => {
@@ -93,10 +160,13 @@ const ElClick: React.FC = () => {
     if (activeElement?.tagName === "IFRAME") {
       isBlurTriggered.current = true;
       setTimeout(() => {
+        reportAdClick("blur", collectAdData());
+      }, 0);
+      setTimeout(() => {
         isBlurTriggered.current = false;
       }, 300);
     }
-  }, []);
+  }, [collectAdData, reportAdClick]);
 
   const handleVisibilityChange = useCallback(
     () => {
@@ -111,6 +181,17 @@ const ElClick: React.FC = () => {
   useEffectEvent("beforeunload", handleBeforeUnload);
   useEffectEvent("blur", handleBlur);
   useEffectEvent("visibilitychange", handleVisibilityChange);
+
+  useEffect(() => {
+    const handler = (event: PointerEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (!target) return;
+      reportAdClick("pointerdown", collectAdDataFromElement(target));
+    };
+
+    window.addEventListener("pointerdown", handler, true);
+    return () => window.removeEventListener("pointerdown", handler, true);
+  }, [collectAdDataFromElement, reportAdClick]);
 
   return null; // This component does not render anything
 };
