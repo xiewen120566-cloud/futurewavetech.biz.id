@@ -41,13 +41,6 @@ const ElClick: React.FC = () => {
   const buildAdData = useCallback(
     (adContainer: Element | null, iframe: HTMLIFrameElement | null): AdData | null => {
       try {
-        if (!adContainer || !iframe) return null;
-
-        const iframeSrc = iframe.getAttribute("src");
-        if (!iframeSrc) return null;
-
-        const formatIframeSrc = new URL(iframeSrc, window.location.href);
-        const iframeSearchParams = new URLSearchParams(formatIframeSrc.search);
         const slotId =
           adContainer.getAttribute("id") ??
           (
@@ -57,10 +50,27 @@ const ElClick: React.FC = () => {
           )?.getAttribute("id") ??
           null;
 
-        return {
+        if (!adContainer) return null;
+
+        const base: AdData = {
           adContainerId: slotId,
-          googleQueryId: iframe.getAttribute("data-google-query-id"),
+          googleQueryId: iframe?.getAttribute("data-google-query-id") ?? null,
           adClickTime: Date.now(),
+          publisherId: null,
+          adk: null,
+          adf: null,
+          slotname: null,
+          adSize: null,
+        };
+
+        const iframeSrc = iframe?.getAttribute("src");
+        if (!iframeSrc) return base;
+
+        const formatIframeSrc = new URL(iframeSrc, window.location.href);
+        const iframeSearchParams = new URLSearchParams(formatIframeSrc.search);
+
+        return {
+          ...base,
           publisherId: iframeSearchParams.get("client"),
           adk: iframeSearchParams.get("adk"),
           adf: iframeSearchParams.get("adf"),
