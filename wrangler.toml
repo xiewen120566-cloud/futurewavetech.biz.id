@@ -4,4 +4,4 @@ compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "./.vercel/output/static"
 
 [vars]
-BASE_URL = "https://futurewavetech.biz.id"
+BASE_URL = "https://adventurewanders.com"
